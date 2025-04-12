@@ -17,6 +17,7 @@ export interface Recepie {
     id:number;
     name:string
     instructions: string
+    cover_image: string
     //'ingredients'=> IngredientResource::collection($this->ingredients),
     user: string
     category: string

@@ -1,5 +1,5 @@
 <div class="p-3 bg-amber-200 m-3 rounded-2xl">
-    <div class="rounded-xl"> <img class="rounded-2xl object-cover" src="images/food.jpg" alt=""></div>
+    <div class="rounded-xl"> <img class="rounded-2xl object-cover" src="{{recepie.cover_image||'images/food.jpg'}}" alt=""></div>
     <div class="flex justify-between">
         <div class="text-2xl font-bold">{{recepie.name}}</div>
         <div class="text-2xl">{{recepie.category}}</div>
