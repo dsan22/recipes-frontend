@@ -13,15 +13,22 @@ export interface Options {
     } | boolean;
 }
 
-export interface Recepie {
+export interface Recipe {
     id:number;
     name:string
     instructions: string
     cover_image: string
-    //'ingredients'=> IngredientResource::collection($this->ingredients),
     user: string
     category: string
 }
-export interface Recepies {
-    data:Recepie[]
+export interface Recipes {
+    data:Recipe[]
+}
+
+export interface Ingredient {
+    name:string
+}
+
+export interface RecipeDetails extends Recipe {
+    ingredients:Ingredient[]    
 }

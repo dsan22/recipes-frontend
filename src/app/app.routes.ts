@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { RecepiesComponent } from './recepies/recepies.component';
+import { RecipesComponent } from './recipes/recipes.component';
 
 export const routes: Routes = [
-    { path: '', component: RecepiesComponent }
+    { path: '', component: RecipesComponent }
 ];

@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { Recepie, Recepies } from '../../types';
+import { Recipe, Recipes } from '../../types';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RecepiesService {
+export class RecipesService {
 
   constructor(private apiService: ApiService) { }
 
-  public getAllRecepies():Observable<Recepies>
+  public getAllRecipes():Observable<Recipes>
   {
     return this.apiService.get('recepies', {
       params: {},
