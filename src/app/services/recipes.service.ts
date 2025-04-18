@@ -13,7 +13,7 @@ export class RecipesService {
 
   public getAllRecipes():Observable<Recipes>
   {
-    return this.apiService.get('recepies', {
+    return this.apiService.get('recipes', {
       params: {},
       responseType: 'json'
     })
