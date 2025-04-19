@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { Recipe, Recipes } from '../../types';
+import { Recipe, RecipeDetails, Recipes } from '../../types';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
@@ -17,6 +17,18 @@ export class RecipesService {
       params: {},
       responseType: 'json'
     })
+  } 
+
+  public getRecipe(id:number):Observable<RecipeDetails>
+  {
+    return this.apiService
+    .get<{ data: RecipeDetails }>(`recipes/${id}`, {
+      params: {},
+      responseType: 'json'
+    }) // pass empty options
+    .pipe(
+      map(response => response.data) // unwrap the data
+    );
   } 
 
 }
