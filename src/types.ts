@@ -30,5 +30,6 @@ export interface Ingredient {
 }
 
 export interface RecipeDetails extends Recipe {
-    ingredients:Ingredient[]    
+    ingredients:Ingredient[]
+    images:string[]    
 }
