@@ -1,4 +1,44 @@
 <div *ngIf="recipe">
-    <p>recipe-details works! {{recipe.name}}</p>
+    <div class="max-w-3xl mx-auto p-6 bg-white rounded-xl shadow-md space-y-6">
+        <!-- Recipe Name -->
+        <h1 class="text-3xl font-bold text-center">{{ recipe.name }}</h1>
+      
+        <!-- Image Carousel -->
+        <div class="relative w-full h-64">
+          <img
+            [src]="recipe.images[currentImageIndex]"
+            alt="Recipe image"
+            class="w-full h-full object-cover rounded-lg"
+          />
+          <button
+            (click)="prevImage()"
+            class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
+          >
+            ‹
+          </button>
+          <button
+            (click)="nextImage()"
+            class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
+          >
+            ›
+          </button>
+        </div>
+      
+        <!-- Ingredients -->
+        <div>
+          <h2 class="text-xl font-semibold mb-2">Ingredients</h2>
+          <ul class="list-disc list-inside space-y-1">
+            <li *ngFor="let ingredient of recipe.ingredients">
+              {{ ingredient.name }}
+            </li>
+          </ul>
+        </div>
+      
+        <!-- Instructions -->
+        <div>
+          <h2 class="text-xl font-semibold mb-2">Instructions</h2>
+          <p class="whitespace-pre-line text-gray-700">{{ recipe.instructions }}</p>
+        </div>
+      </div>
 </div>
 

@@ -21,8 +21,22 @@ export class RecipeDetailsComponent {
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-    this.recipesService.getRecipe(+id).subscribe((data)=>this.recipe=data);
+    this.recipesService.getRecipe(+id).subscribe((data)=>{
+      this.recipe=data
+      console.log(JSON.stringify(this.recipe as RecipeDetails))
+    });
     }
+  }
+
+  currentImageIndex = 0;
+
+  nextImage() {
+    this.currentImageIndex = (this.currentImageIndex + 1) % this.recipe.images.length;
+  }
+
+  prevImage() {
+    this.currentImageIndex =
+      (this.currentImageIndex - 1 + this.recipe.images.length) % this.recipe.images.length;
   }
 
 
