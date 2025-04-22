@@ -3,6 +3,10 @@
         <!-- Recipe Name -->
         <h1 class="text-3xl font-bold text-center">{{ recipe.name }}</h1>
       
+
+         <!-- Description -->
+          <h1 class="text-xl text-center">{{ recipe.description }}</h1>
+
         <!-- Image Carousel -->
         <div class="relative w-full h-64">
           <img
@@ -37,7 +41,11 @@
         <!-- Instructions -->
         <div>
           <h2 class="text-xl font-semibold mb-2">Instructions</h2>
-          <p class="whitespace-pre-line text-gray-700">{{ recipe.instructions }}</p>
+          <ul class="list-disc list-inside space-y-1">
+            <li *ngFor="let instruction of recipe.instructions">
+              {{ instruction }}
+            </li>
+          </ul>
         </div>
       </div>
 </div>

@@ -23,7 +23,6 @@ export class RecipeDetailsComponent {
     if (id) {
     this.recipesService.getRecipe(+id).subscribe((data)=>{
       this.recipe=data
-      console.log(JSON.stringify(this.recipe as RecipeDetails))
     });
     }
   }

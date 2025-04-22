@@ -16,7 +16,7 @@ export interface Options {
 export interface Recipe {
     id:number;
     name:string
-    instructions: string
+    description: string
     cover_image: string
     user: string
     category: string
@@ -30,6 +30,7 @@ export interface Ingredient {
 }
 
 export interface RecipeDetails extends Recipe {
-    ingredients:Ingredient[]
+    ingredients:Ingredient[],
+    instructions:string[],
     images:string[]    
 }
