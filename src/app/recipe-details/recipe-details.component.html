@@ -1,18 +1,18 @@
 <div *ngIf="recipe">
-    <div class="max-w-3xl mx-auto p-6 bg-white rounded-xl shadow-md space-y-6">
+    <div class="max-w-[75%] mx-auto p-6 bg-white  space-y-6">
         <!-- Recipe Name -->
-        <h1 class="text-3xl font-bold text-center">{{ recipe.name }}</h1>
+        <h1 class="text-4xl font-bold">{{ recipe.name }}</h1>
       
 
-         <!-- Description -->
-          <h1 class="text-xl text-center">{{ recipe.description }}</h1>
+        <!-- Description -->
+        <h1 class="text-xl ">{{ recipe.description }}</h1>
 
         <!-- Image Carousel -->
-        <div class="relative w-full h-64">
+        <div class="relative w-full h-90 flex justify-center " >
           <img
             [src]="recipe.images[currentImageIndex]"
             alt="Recipe image"
-            class="w-full h-full object-cover rounded-lg"
+            class="w-[50%]  object-contain rounded-lg"
           />
           <button
             (click)="prevImage()"
@@ -30,22 +30,23 @@
       
         <!-- Ingredients -->
         <div>
-          <h2 class="text-xl font-semibold mb-2">Ingredients</h2>
+          <h2 class="text-3xl font-bold mb-2">Ingredients</h2>
           <ul class="list-disc list-inside space-y-1">
-            <li *ngFor="let ingredient of recipe.ingredients">
-              {{ ingredient.name }}
-            </li>
+            <li *ngFor="let ingredient of recipe.ingredients" class="flex gap-1 items-start">
+              <span class="text-xl leading-none text-orange-400">•</span>
+              <span class="leading-tight">{{ ingredient.name }}</span>
           </ul>
         </div>
       
         <!-- Instructions -->
         <div>
-          <h2 class="text-xl font-semibold mb-2">Instructions</h2>
-          <ul class="list-disc list-inside space-y-1">
-            <li *ngFor="let instruction of recipe.instructions">
-              {{ instruction }}
-            </li>
-          </ul>
+          <h2 class="text-3xl font-bold mb-2">Instructions</h2>
+          <div class="pt-2">
+            <div class="pt-3" *ngFor="let instruction of recipe.instructions; let i = index">
+              <h1 class="text-xl font-semibold">Step {{ i + 1 }}</h1>
+              <div>{{ instruction }}</div>
+            </div>
+          </div>
         </div>
       </div>
 </div>
