@@ -34,7 +34,7 @@
           <ul class="list-disc list-inside space-y-1">
             <li *ngFor="let ingredient of recipe.ingredients" class="flex gap-1 items-start">
               <span class="text-xl leading-none text-orange-400">•</span>
-              <span class="leading-tight">{{ ingredient.name }}</span>
+              <span class="leading-tight">{{ ingredient.amount}} {{ingredient.name}}{{ ingredient.notes ? ', ' + ingredient.notes : '' }}</span>
           </ul>
         </div>
       

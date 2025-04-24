@@ -26,7 +26,9 @@ export interface Recipes {
 }
 
 export interface Ingredient {
-    name:string
+    name:string,
+    amount:string,
+    notes:string,
 }
 
 export interface RecipeDetails extends Recipe {
