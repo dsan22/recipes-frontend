@@ -3,11 +3,12 @@ import { RecipeDetails } from '../../types';
 import { ActivatedRoute } from '@angular/router';
 import { RecipesService } from '../services/recipes.service';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-recipe-details',
-  imports: [CommonModule],
+  imports: [CommonModule,FormsModule],
   templateUrl: './recipe-details.component.html',
   styleUrl: './recipe-details.component.css'
 })
@@ -28,6 +29,7 @@ export class RecipeDetailsComponent {
   }
 
   currentImageIndex = 0;
+  isEdit = false;
 
   nextImage() {
     this.currentImageIndex = (this.currentImageIndex + 1) % this.recipe.images.length;

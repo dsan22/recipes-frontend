@@ -1,53 +1,107 @@
 <div *ngIf="recipe">
-    <div class="max-w-[75%] mx-auto p-6 bg-white  space-y-6">
-        <!-- Recipe Name -->
-        <h1 class="text-4xl font-bold">{{ recipe.name }}</h1>
-      
+    <!-- Toggle Edit Mode Button -->
+  <button
+  (click)="isEdit = !isEdit"
+  class="fixed bottom-6 right-6 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-full shadow-lg transition-all duration-200"
+  >
+    {{ isEdit ? 'View Mode' : 'Edit Mode' }}
+  </button>
+  <div class="max-w-[75%] mx-auto p-6 bg-white space-y-6">
 
-        <!-- Description -->
-        <h1 class="text-xl ">{{ recipe.description }}</h1>
-
-        <!-- Image Carousel -->
-        <div class="relative w-full h-90 flex justify-center " >
-          <img
-            [src]="recipe.images[currentImageIndex]"
-            alt="Recipe image"
-            class="w-[50%]  object-contain rounded-lg"
+    <!-- Recipe Name -->
+    <div>
+      <h1 *ngIf="!isEdit" class="text-4xl font-bold">{{ recipe.name }}</h1>
+      <input
+        *ngIf="isEdit"
+        [(ngModel)]="recipe.name"
+        class="text-4xl font-bold w-full border-b border-gray-300 focus:outline-none focus:border-orange-400"
+      />
+    </div>
+  
+    <!-- Description -->
+    <div>
+      <h1 *ngIf="!isEdit" class="text-xl">{{ recipe.description }}</h1>
+      <textarea
+        *ngIf="isEdit"
+        [(ngModel)]="recipe.description"
+        class="text-xl w-full border-b border-gray-300 focus:outline-none focus:border-orange-400"
+      ></textarea>
+    </div>
+  
+    <!-- Image Carousel -->
+    <div class="relative w-full h-90 flex justify-center">
+      <img
+        [src]="recipe.images[currentImageIndex]"
+        alt="Recipe image"
+        class="w-[50%] object-contain rounded-lg"
+      />
+      <button
+        (click)="prevImage()"
+        class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
+      >
+        ‹
+      </button>
+      <button
+        (click)="nextImage()"
+        class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
+      >
+        ›
+      </button>
+    </div>
+  
+    <!-- Ingredients -->
+    <div>
+      <h2 class="text-3xl font-bold mb-2">Ingredients</h2>
+      <ul class="list-disc list-inside space-y-1" *ngIf="!isEdit">
+        <li *ngFor="let ingredient of recipe.ingredients" class="flex gap-1 items-start">
+          <span class="text-xl leading-none text-orange-400">•</span>
+          <span class="leading-tight">
+            {{ ingredient.amount }} {{ ingredient.name }}{{ ingredient.notes ? ', ' + ingredient.notes : '' }}
+          </span>
+        </li>
+      </ul>
+  
+      <div *ngIf="isEdit" class="space-y-2">
+        <div *ngFor="let ingredient of recipe.ingredients; let i = index" class="flex flex-col sm:flex-row gap-2">
+          <input
+            [(ngModel)]="ingredient.amount"
+            placeholder="Amount"
+            class="border-b w-1/4 px-2 focus:outline-none focus:border-orange-400"
           />
-          <button
-            (click)="prevImage()"
-            class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
-          >
-            ‹
-          </button>
-          <button
-            (click)="nextImage()"
-            class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
-          >
-            ›
-          </button>
-        </div>
-      
-        <!-- Ingredients -->
-        <div>
-          <h2 class="text-3xl font-bold mb-2">Ingredients</h2>
-          <ul class="list-disc list-inside space-y-1">
-            <li *ngFor="let ingredient of recipe.ingredients" class="flex gap-1 items-start">
-              <span class="text-xl leading-none text-orange-400">•</span>
-              <span class="leading-tight">{{ ingredient.amount}} {{ingredient.name}}{{ ingredient.notes ? ', ' + ingredient.notes : '' }}</span>
-          </ul>
-        </div>
-      
-        <!-- Instructions -->
-        <div>
-          <h2 class="text-3xl font-bold mb-2">Instructions</h2>
-          <div class="pt-2">
-            <div class="pt-3" *ngFor="let instruction of recipe.instructions; let i = index">
-              <h1 class="text-xl font-semibold">Step {{ i + 1 }}</h1>
-              <div>{{ instruction }}</div>
-            </div>
-          </div>
+          <input
+            [(ngModel)]="ingredient.name"
+            placeholder="Ingredient"
+            class="border-b w-1/2 px-2 focus:outline-none focus:border-orange-400"
+          />
+          <input
+            [(ngModel)]="ingredient.notes"
+            placeholder="Notes"
+            class="border-b flex-1 px-2 focus:outline-none focus:border-orange-400"
+          />
         </div>
       </div>
+    </div>
+  
+    <!-- Instructions -->
+    <div>
+      <h2 class="text-3xl font-bold mb-2">Instructions</h2>
+      <div class="pt-2" *ngIf="!isEdit">
+        <div class="pt-3" *ngFor="let instruction of recipe.instructions; let i = index">
+          <h1 class="text-xl font-semibold">Step {{ i + 1 }}</h1>
+          <div>{{ instruction }}</div>
+        </div>
+      </div>
+  
+      <div *ngIf="isEdit" class="space-y-4">
+        <div *ngFor="let instruction of recipe.instructions; let i = index" class="flex flex-col">
+          <label class="text-xl font-semibold">Step {{ i + 1 }}</label>
+          <textarea
+            [(ngModel)]="recipe.instructions[i]"
+            class="w-full border-b focus:outline-none focus:border-orange-400"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
