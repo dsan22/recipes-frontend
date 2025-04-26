@@ -4,15 +4,17 @@ import { ActivatedRoute } from '@angular/router';
 import { RecipesService } from '../services/recipes.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RecipeImageFormModalComponent } from '../recipe-image-form-modal/recipe-image-form-modal.component';
 
 
 @Component({
   selector: 'app-recipe-details',
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule,RecipeImageFormModalComponent],
   templateUrl: './recipe-details.component.html',
   styleUrl: './recipe-details.component.css'
 })
 export class RecipeDetailsComponent {
+
   constructor( 
     private route: ActivatedRoute, 
     private recipesService: RecipesService
@@ -40,5 +42,19 @@ export class RecipeDetailsComponent {
       (this.currentImageIndex - 1 + this.recipe.images.length) % this.recipe.images.length;
   }
 
+  isModalOpen = false;
 
+  openImageModal() {
+    this.isModalOpen = true;
+  }
+
+  closeImageModal() {
+    this.isModalOpen = false;
+  }
+
+  handleSave(data: { image: File | null; isCover: boolean }) {
+    console.log('Saved image:', data.image);
+    console.log('Is cover:', data.isCover);
+    // TODO: Handle upload/save logic
+  }
 }

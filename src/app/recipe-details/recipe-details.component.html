@@ -29,7 +29,16 @@
     </div>
   
     <!-- Image Carousel -->
+    <div *ngIf="isEdit">
+      <button
+       class="px-4 py-2 bg-lime-500 hover:bg-lime-600 text-white font-semibold rounded-lg shadow-md transition duration-300"
+       (click)="openImageModal()"
+       >
+        + Add Image
+      </button>
+    </div>
     <div class="relative w-full h-90 flex justify-center">
+      
       <img
         [src]="recipe.images[currentImageIndex]"
         alt="Recipe image"
@@ -104,4 +113,10 @@
     </div>
   </div>
 </div>
+
+<app-recipe-image-form-modal
+  *ngIf="isModalOpen"
+  (close)="closeImageModal()"
+  (save)="handleSave($event)"
+></app-recipe-image-form-modal>
 
