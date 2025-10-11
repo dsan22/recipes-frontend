@@ -1,10 +1,10 @@
-import { Component, Input, } from '@angular/core';
+import { Component} from '@angular/core';
 import { RecipeDetails } from '../../types';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RecipesService } from '../services/recipes.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RecipeImageFormModalComponent } from '../recipe-image-form-modal/recipe-image-form-modal.component';
+
 
 
 @Component({
@@ -17,7 +17,8 @@ export class RecipeDetailsComponent {
 
   constructor( 
     private route: ActivatedRoute, 
-    private recipesService: RecipesService
+    private recipesService: RecipesService,
+    private router:Router
   ) { }
 
   public recipe!:RecipeDetails
@@ -40,4 +41,8 @@ export class RecipeDetailsComponent {
     this.currentImageIndex =
       (this.currentImageIndex - 1 + this.recipe.images.length) % this.recipe.images.length;
   }
+
+  editRecipe() {
+    this.router.navigate(['recipes', this.recipe.id, 'edit']);
+  } 
 }
