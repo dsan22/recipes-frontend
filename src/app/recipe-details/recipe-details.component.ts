@@ -9,7 +9,7 @@ import { RecipeImageFormModalComponent } from '../recipe-image-form-modal/recipe
 
 @Component({
   selector: 'app-recipe-details',
-  imports: [CommonModule,FormsModule,RecipeImageFormModalComponent],
+  imports: [CommonModule,FormsModule],
   templateUrl: './recipe-details.component.html',
   styleUrl: './recipe-details.component.css'
 })
@@ -31,7 +31,6 @@ export class RecipeDetailsComponent {
   }
 
   currentImageIndex = 0;
-  isEdit = false;
 
   nextImage() {
     this.currentImageIndex = (this.currentImageIndex + 1) % this.recipe.images.length;
@@ -40,21 +39,5 @@ export class RecipeDetailsComponent {
   prevImage() {
     this.currentImageIndex =
       (this.currentImageIndex - 1 + this.recipe.images.length) % this.recipe.images.length;
-  }
-
-  isModalOpen = false;
-
-  openImageModal() {
-    this.isModalOpen = true;
-  }
-
-  closeImageModal() {
-    this.isModalOpen = false;
-  }
-
-  handleSave(data: { image: File | null; isCover: boolean }) {
-    console.log('Saved image:', data.image);
-    console.log('Is cover:', data.isCover);
-    // TODO: Handle upload/save logic
   }
 }
