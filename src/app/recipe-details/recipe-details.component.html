@@ -1,42 +1,17 @@
 <div *ngIf="recipe">
-    <!-- Toggle Edit Mode Button -->
-  <button
-  (click)="isEdit = !isEdit"
-  class="fixed bottom-6 right-6 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-full shadow-lg transition-all duration-200"
-  >
-    {{ isEdit ? 'View Mode' : 'Edit Mode' }}
-  </button>
   <div class="max-w-[75%] mx-auto p-6 bg-white space-y-6">
 
     <!-- Recipe Name -->
     <div>
-      <h1 *ngIf="!isEdit" class="text-4xl font-bold">{{ recipe.name }}</h1>
-      <input
-        *ngIf="isEdit"
-        [(ngModel)]="recipe.name"
-        class="text-4xl font-bold w-full border-b border-gray-300 focus:outline-none focus:border-orange-400"
-      />
+      <h1 class="text-4xl font-bold">{{ recipe.name }}</h1>
     </div>
   
     <!-- Description -->
     <div>
-      <h1 *ngIf="!isEdit" class="text-xl">{{ recipe.description }}</h1>
-      <textarea
-        *ngIf="isEdit"
-        [(ngModel)]="recipe.description"
-        class="text-xl w-full border-b border-gray-300 focus:outline-none focus:border-orange-400"
-      ></textarea>
+      <h1  class="text-xl">{{ recipe.description }}</h1>
     </div>
   
     <!-- Image Carousel -->
-    <div *ngIf="isEdit">
-      <button
-       class="px-4 py-2 bg-lime-500 hover:bg-lime-600 text-white font-semibold rounded-lg shadow-md transition duration-300"
-       (click)="openImageModal()"
-       >
-        + Add Image
-      </button>
-    </div>
     <div class="relative w-full h-90 flex justify-center">
       
       <img
@@ -69,26 +44,6 @@
           </span>
         </li>
       </ul>
-  
-      <div *ngIf="isEdit" class="space-y-2">
-        <div *ngFor="let ingredient of recipe.ingredients; let i = index" class="flex flex-col sm:flex-row gap-2">
-          <input
-            [(ngModel)]="ingredient.amount"
-            placeholder="Amount"
-            class="border-b w-1/4 px-2 focus:outline-none focus:border-orange-400"
-          />
-          <input
-            [(ngModel)]="ingredient.name"
-            placeholder="Ingredient"
-            class="border-b w-1/2 px-2 focus:outline-none focus:border-orange-400"
-          />
-          <input
-            [(ngModel)]="ingredient.notes"
-            placeholder="Notes"
-            class="border-b flex-1 px-2 focus:outline-none focus:border-orange-400"
-          />
-        </div>
-      </div>
     </div>
   
     <!-- Instructions -->
@@ -100,23 +55,8 @@
           <div>{{ instruction }}</div>
         </div>
       </div>
-  
-      <div *ngIf="isEdit" class="space-y-4">
-        <div *ngFor="let instruction of recipe.instructions; let i = index" class="flex flex-col">
-          <label class="text-xl font-semibold">Step {{ i + 1 }}</label>
-          <textarea
-            [(ngModel)]="recipe.instructions[i]"
-            class="w-full border-b focus:outline-none focus:border-orange-400"
-          ></textarea>
-        </div>
-      </div>
     </div>
   </div>
 </div>
 
-<app-recipe-image-form-modal
-  *ngIf="isModalOpen"
-  (close)="closeImageModal()"
-  (save)="handleSave($event)"
-></app-recipe-image-form-modal>
 
