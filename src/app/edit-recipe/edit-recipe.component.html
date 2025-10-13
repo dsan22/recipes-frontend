@@ -17,6 +17,8 @@
         />
     </div>
 
+    <!--INGREDIENTS-->
+
     <div class="border-t border-gray-300 my-6"></div> 
 
     <h1 class="text-xl font-bold mb-4">Ingredients</h1>
@@ -67,5 +69,47 @@
         Add Ingredient 
     </button>
 
+    <!--INSTRUCTIONS-->
+    
+    <div class="border-t border-gray-300 my-6"></div> 
+
+    <h1 class="text-xl font-bold mb-4">Instructions</h1>
+    
+    <div formArrayName="instructions" class="space-y-4">
+        <div 
+            *ngFor="let ingredientGroup of ingredientForms.controls; let i = index" 
+            [formGroupName]="i" 
+            class="p-4 border border-gray-200 rounded-lg bg-gray-50"
+        >
+            <h2 class="text-sm font-semibold mb-2">Instruction #{{ i + 1 }}</h2>
+            
+            <div class="flex gap-3 mb-2">
+                <div class="flex-grow">
+                    <label class="block text-gray-700 text-xs font-bold mb-1">Instruction</label>
+                    <input
+                        formControlName="instruction"
+                        placeholder="e.g., Peal Potatos"
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight text-sm focus:outline-none focus:shadow-outline"
+                    />
+                </div>
+            </div>
+
+            <button 
+                (click)="deleteInstructionForm(i)"
+                type="button"
+                class="mt-2 bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-sm focus:outline-none focus:shadow-outline"
+            >
+                Remove Instruction
+            </button>
+        </div>
+    </div>
+    
+    <button 
+        (click)="addInstructionForm()"
+        type="button"
+        class="mt-4 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+    > 
+        Add Instruction 
+    </button>
 </form>
 </div>
