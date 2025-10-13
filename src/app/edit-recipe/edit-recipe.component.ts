@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecipesService } from '../services/recipes.service';
 import { RecipeDetails } from '../../types';
-import { FormBuilder, FormGroup, ReactiveFormsModule  } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule,FormArray  } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-edit-recipe',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,CommonModule],
   templateUrl: './edit-recipe.component.html',
   styleUrl: './edit-recipe.component.css'
 })
@@ -26,6 +27,7 @@ export class EditRecipeComponent {
       {
         name : "",
         description:"",
+        ingredients:fb.array([]),
       }
     )
   }
@@ -35,21 +37,44 @@ export class EditRecipeComponent {
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-    this.recipesService.getRecipe(+id).subscribe((data)=>{
-      this.recipe=data
+      this.recipesService.getRecipe(+id).subscribe((data)=>{
+        this.recipe=data
 
-      this.editForm.patchValue({
-            name: data.name,
-            description:data.description
-            // Add other properties here
+        this.editForm.patchValue({
+              name: data.name,
+              description:data.description
+              // Add other properties here
+            });
+
+        this.ingredientForms.clear(); 
+
+        if (data.ingredients) {
+          data.ingredients.forEach((ingredient: any) => {
+            this.ingredientForms.push(
+              this.ingredientFormGroup(ingredient.name, ingredient.amount)
+            );
           });
-
-    });
+        }
+      });
     }
-
-    
   }
 
+  private ingredientFormGroup(name="",amount=""){
+    return this.fb.group({
+      name: name,
+      amount:amount
+    })
+  }
 
+  get ingredientForms():FormArray {
+    return this.editForm.get("ingredients") as FormArray
+  }
 
+  addIngredientForm(){
+    this.ingredientForms.push(this.ingredientFormGroup()); 
+  }
+
+  deleteIngredientForm(i: number){
+    this.ingredientForms.removeAt(i);
+  }
 }
