@@ -28,6 +28,7 @@ export class EditRecipeComponent {
         name : "",
         description:"",
         ingredients:fb.array([]),
+        instructions:fb.array([]),
       }
     )
   }
@@ -55,6 +56,16 @@ export class EditRecipeComponent {
             );
           });
         }
+
+        this.instructionForms.clear(); 
+
+        if (data.instructions) {
+          data.instructions.forEach((instruction: any) => {
+            this.instructionForms.push(
+              this.instructionsFormGroup(instruction)
+            );
+          });
+        }
       });
     }
   }
@@ -76,5 +87,24 @@ export class EditRecipeComponent {
 
   deleteIngredientForm(i: number){
     this.ingredientForms.removeAt(i);
+  }
+
+
+  private instructionsFormGroup(instruction=""){
+    return this.fb.group({
+      instruction: instruction,
+    })
+  }
+
+  get instructionForms():FormArray {
+    return this.editForm.get("instructions") as FormArray
+  }
+
+  addInstructionForm(){
+    this.ingredientForms.push(this.instructionsFormGroup()); 
+  }
+
+  deleteInstructionForm(i: number){
+    this.instructionForms.removeAt(i);
   }
 }
