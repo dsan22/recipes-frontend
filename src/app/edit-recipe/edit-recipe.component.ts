@@ -101,7 +101,7 @@ export class EditRecipeComponent {
   }
 
   addInstructionForm(){
-    this.ingredientForms.push(this.instructionsFormGroup()); 
+    this.instructionForms.push(this.instructionsFormGroup()); 
   }
 
   deleteInstructionForm(i: number){
