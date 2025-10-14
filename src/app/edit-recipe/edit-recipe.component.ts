@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecipesService } from '../services/recipes.service';
 import { RecipeDetails } from '../../types';
 import { FormBuilder, FormGroup, ReactiveFormsModule,FormArray  } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { DragDropModule,CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-edit-recipe',
-  imports: [ReactiveFormsModule,CommonModule],
+  imports: [ReactiveFormsModule,CommonModule,DragDropModule],
   templateUrl: './edit-recipe.component.html',
   styleUrl: './edit-recipe.component.css'
 })
@@ -21,7 +22,8 @@ export class EditRecipeComponent {
     private route: ActivatedRoute, 
     private recipesService: RecipesService,
     private router:Router,
-    private fb:FormBuilder
+    private fb:FormBuilder,
+    private cdr: ChangeDetectorRef
   ){
     this.editForm= this.fb.group(
       {
@@ -107,4 +109,9 @@ export class EditRecipeComponent {
   deleteInstructionForm(i: number){
     this.instructionForms.removeAt(i);
   }
-}
+  //For drag and drop
+  dropInstruction(event: CdkDragDrop<FormGroup[]>) {
+    moveItemInArray(this.instructionForms.controls, event.previousIndex, event.currentIndex);
+    this.instructionForms.updateValueAndValidity();
+  }
+  }
