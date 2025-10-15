@@ -24,8 +24,8 @@
     <h1 class="text-xl font-bold mb-4">Ingredients</h1>
     
     <div formArrayName="ingredients" class="space-y-4">
-        <div 
-            *ngFor="let ingredientGroup of ingredientForms.controls; let i = index" 
+        @for (ingredientGroup of ingredientForms.controls; track $index ; let i=$index) {
+        <div  
             [formGroupName]="i" 
             class="p-4 border border-gray-200 rounded-lg bg-gray-50"
         >
@@ -59,6 +59,7 @@
                 Remove Ingredient
             </button>
         </div>
+        }
     </div>
     
     <button 
@@ -76,13 +77,13 @@
     <h1 class="text-xl font-bold mb-4">Instructions</h1>
 
     <div
-  formArrayName="instructions"
-  cdkDropList
-  (cdkDropListDropped)="dropInstruction($event)"
-  class="space-y-4"
->
+        formArrayName="instructions"
+        cdkDropList
+        (cdkDropListDropped)="dropInstruction($event)"
+        class="space-y-4"
+    >   
+    @for (instructionGroup of instructionForms.controls; track $index ; let i=$index) {
     <div
-        *ngFor="let instructionGroup of instructionForms.controls; let i = index"
         [formGroupName]="i"
         cdkDrag
         class="p-4 border border-gray-200 rounded-lg bg-gray-50 flex items-center gap-3"
@@ -136,7 +137,9 @@
                 </svg>
             </button>
         </div>
+    }
     </div>
+    
 
 
     <button 
