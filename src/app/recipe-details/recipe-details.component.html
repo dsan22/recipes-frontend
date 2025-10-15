@@ -54,8 +54,8 @@
       <h2 class="text-3xl font-bold mb-2">Instructions</h2>
       <div class="pt-2">
         <div class="pt-3" *ngFor="let instruction of recipe.instructions; let i = index">
-          <h1 class="text-xl font-semibold">Step {{ i + 1 }}</h1>
-          <div>{{ instruction }}</div>
+          <h1 class="text-xl font-semibold">Step {{ instruction.step }}</h1>
+          <div>{{ instruction.instruction }}</div>
         </div>
       </div>
     </div>

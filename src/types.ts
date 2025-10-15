@@ -26,13 +26,20 @@ export interface Recipes {
 }
 
 export interface Ingredient {
+    id:number,
     name:string,
     amount:string,
     notes:string,
 }
 
+export interface Instruction {
+    id:string,
+    step:number,
+    instruction:string,
+}
+
 export interface RecipeDetails extends Recipe {
     ingredients:Ingredient[],
-    instructions:string[],
+    instructions:Instruction[],
     images:string[]    
 }

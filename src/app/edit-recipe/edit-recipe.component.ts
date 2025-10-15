@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecipesService } from '../services/recipes.service';
-import { RecipeDetails } from '../../types';
+import { Instruction, RecipeDetails } from '../../types';
 import { FormBuilder, FormGroup, ReactiveFormsModule,FormArray  } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DragDropModule,CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -62,9 +62,9 @@ export class EditRecipeComponent {
         this.instructionForms.clear(); 
 
         if (data.instructions) {
-          data.instructions.forEach((instruction: any) => {
+          data.instructions.forEach((instruction: Instruction) => {
             this.instructionForms.push(
-              this.instructionsFormGroup(instruction)
+              this.instructionsFormGroup(instruction.instruction )
             );
           });
         }
