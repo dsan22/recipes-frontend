@@ -31,4 +31,12 @@ export class RecipesService {
     );
   } 
 
+  public updateRecipe(id: number, recipeData: any): Observable<RecipeDetails> {
+    return this.apiService
+      .put<{ data: RecipeDetails }>(`recipes/${id}`, recipeData, {
+        responseType: 'json'
+      })
+      .pipe(map(response => response.data));
+  }
+
 }

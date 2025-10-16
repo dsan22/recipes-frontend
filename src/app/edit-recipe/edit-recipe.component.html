@@ -29,6 +29,7 @@
             [formGroupName]="i" 
             class="p-4 border border-gray-200 rounded-lg bg-gray-50"
         >
+            <input type="hidden" formControlName="id" />
             <h2 class="text-sm font-semibold mb-2">Ingredient #{{ i + 1 }}</h2>
             
             <div class="flex gap-3 mb-2">
@@ -82,12 +83,15 @@
         (cdkDropListDropped)="dropInstruction($event)"
         class="space-y-4"
     >   
-    @for (instructionGroup of instructionForms.controls; track $index ; let i=$index) {
+    @for (instructionGroup of instructionForms.controls; track instructionGroup ; let i=$index)  {
     <div
         [formGroupName]="i"
         cdkDrag
         class="p-4 border border-gray-200 rounded-lg bg-gray-50 flex items-center gap-3"
     >
+        <input type="hidden" formControlName="id" />
+        <input type="hidden" formControlName="step" />
+
         <!-- Drag handle -->
         <div
         cdkDragHandle
@@ -148,6 +152,17 @@
     class="mt-4 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
     >
     Add Instruction
+    </button>
+
+    <div class="border-t border-gray-300 my-6"></div>
+
+    <button
+        type="submit"
+        (click)="submit()"
+        [disabled]="editForm.invalid"
+        class="w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:opacity-50 disabled:cursor-not-allowed transition"
+    >
+        Save Changes
     </button>
 </form>
 </div>

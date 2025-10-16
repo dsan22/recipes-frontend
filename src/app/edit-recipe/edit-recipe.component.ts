@@ -35,8 +35,6 @@ export class EditRecipeComponent {
     )
   }
 
-
-
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
@@ -54,7 +52,7 @@ export class EditRecipeComponent {
         if (data.ingredients) {
           data.ingredients.forEach((ingredient: any) => {
             this.ingredientForms.push(
-              this.ingredientFormGroup(ingredient.name, ingredient.amount)
+              this.ingredientFormGroup(ingredient.id, ingredient.name, ingredient.amount)
             );
           });
         }
@@ -62,9 +60,9 @@ export class EditRecipeComponent {
         this.instructionForms.clear(); 
 
         if (data.instructions) {
-          data.instructions.forEach((instruction: Instruction) => {
+          data.instructions.forEach((instruction: any) => {
             this.instructionForms.push(
-              this.instructionsFormGroup(instruction.instruction )
+              this.instructionsFormGroup(instruction.id, instruction.instruction,instruction.step)
             );
           });
         }
@@ -72,11 +70,12 @@ export class EditRecipeComponent {
     }
   }
 
-  private ingredientFormGroup(name="",amount=""){
+  private ingredientFormGroup(id: number | null = null, name = "", amount = "") {
     return this.fb.group({
-      name: name,
-      amount:amount
-    })
+      id: [id],
+      name: [name],
+      amount: [amount],
+    });
   }
 
   get ingredientForms():FormArray {
@@ -91,27 +90,51 @@ export class EditRecipeComponent {
     this.ingredientForms.removeAt(i);
   }
 
-
-  private instructionsFormGroup(instruction=""){
+  private instructionsFormGroup(id: number | null = null, instruction = "", step: number | null = null) {
     return this.fb.group({
-      instruction: instruction,
-    })
+      id: [id],
+      instruction: [instruction],
+      step: [step],
+    });
   }
 
   get instructionForms():FormArray {
     return this.editForm.get("instructions") as FormArray
   }
 
+  private updateInstructionSteps(): void {
+    this.instructionForms.controls.forEach((control, index) => {
+      control.get('step')?.setValue(index + 1);
+    });
+  }
+
   addInstructionForm(){
-    this.instructionForms.push(this.instructionsFormGroup()); 
+    this.instructionForms.push(this.instructionsFormGroup());
+    this.updateInstructionSteps(); 
   }
 
   deleteInstructionForm(i: number){
     this.instructionForms.removeAt(i);
+    this.updateInstructionSteps(); 
   }
+
   //For drag and drop
   dropInstruction(event: CdkDragDrop<FormGroup[]>) {
     moveItemInArray(this.instructionForms.controls, event.previousIndex, event.currentIndex);
-    this.instructionForms.updateValueAndValidity();
+    //this.updateInstructionSteps();
+    //this.instructionForms.updateValueAndValidity();
+    //this.cdr.detectChanges();
   }
+
+  submit() {
+    const id = this.recipe.id;
+    const updatedRecipe = this.editForm.value;
+
+    this.recipesService.updateRecipe(id, updatedRecipe).subscribe({
+      next: () => {
+        this.router.navigate(['/recipes', id]);
+      },
+      error: (err) => console.error('Update failed:', err)
+    });
   }
+}
