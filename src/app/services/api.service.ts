@@ -8,12 +8,23 @@ import { Options } from '../../types';
 })
 export class ApiService {
 
-  constructor(
-    private httpClient:HttpClient
-  ) { }
-
   private baseUrl = 'http://127.0.0.1:8000/api/';
-  get<T>(url:string,options:Options):Observable<T>{
-    return this.httpClient.get<T>(this.baseUrl+url,options) as Observable<T>;
+
+  constructor(private httpClient: HttpClient) {}
+
+  get<T>(url: string, options: Options): Observable<T> {
+    return this.httpClient.get<T>(this.baseUrl + url, options) as Observable<T>;
+  }
+
+  post<T>(url: string, body: any, options: Options = {}): Observable<T> {
+    return this.httpClient.post<T>(this.baseUrl + url, body, options);
+  }
+
+  put<T>(url: string, body: any, options: Options = {}): Observable<T> {
+    return this.httpClient.put<T>(this.baseUrl + url, body, options);
+  }
+
+  delete<T>(url: string, options: Options = {}): Observable<T> {
+    return this.httpClient.delete<T>(this.baseUrl + url, options);
   }
 }
