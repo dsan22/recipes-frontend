@@ -135,4 +135,7 @@ export class EditRecipeComponent {
       error: (err) => console.error('Update failed:', err)
     });
   }
+  cancel() {
+   this.router.navigate(['/recipes', this.recipe.id]);
+  }
 }
