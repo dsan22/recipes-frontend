@@ -121,9 +121,7 @@ export class EditRecipeComponent {
   //For drag and drop
   dropInstruction(event: CdkDragDrop<FormGroup[]>) {
     moveItemInArray(this.instructionForms.controls, event.previousIndex, event.currentIndex);
-    //this.updateInstructionSteps();
-    //this.instructionForms.updateValueAndValidity();
-    //this.cdr.detectChanges();
+    this.updateInstructionSteps();
   }
 
   submit() {
