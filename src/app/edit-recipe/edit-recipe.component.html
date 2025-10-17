@@ -1,168 +1,168 @@
-<div class="pt-6">
-    <form class="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md" [formGroup]="editForm">
-    
-    <div class="mb-4">
-        <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name:</label>
-        <input
-            formControlName="name"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        />
+<div class="pt-10">
+  <form
+    class="max-w-4xl mx-auto p-8 bg-white rounded-2xl shadow-lg space-y-8"
+    [formGroup]="editForm"
+  >
+    <!-- Title -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <h1 class="text-4xl font-extrabold text-gray-800">Edit Recipe</h1>
     </div>
 
-    <div class="mb-6">
-        <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Description:</label>
+    <!-- Recipe Info -->
+    <div class="grid sm:grid-cols-2 gap-6">
+      <div>
+        <label class="block text-gray-700 text-sm font-bold mb-2">Name</label>
         <input
-            formControlName="description"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          formControlName="name"
+          placeholder="Enter recipe name"
+          class="border border-gray-300 rounded-lg w-full py-2.5 px-4 text-gray-800 focus:outline-none focus:ring-2 focus:ring-orange-400 transition shadow-sm"
         />
+      </div>
+
+      <div>
+        <label class="block text-gray-700 text-sm font-bold mb-2">Description</label>
+        <input
+          formControlName="description"
+          placeholder="Short recipe description"
+          class="border border-gray-300 rounded-lg w-full py-2.5 px-4 text-gray-800 focus:outline-none focus:ring-2 focus:ring-orange-400 transition shadow-sm"
+        />
+      </div>
     </div>
 
-    <!--INGREDIENTS-->
+    <!-- Ingredients -->
+    <div class="border-t border-gray-200 pt-8">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+        Ingredients
+      </h2>
 
-    <div class="border-t border-gray-300 my-6"></div> 
-
-    <h1 class="text-xl font-bold mb-4">Ingredients</h1>
-    
-    <div formArrayName="ingredients" class="space-y-4">
-        @for (ingredientGroup of ingredientForms.controls; track $index ; let i=$index) {
-        <div  
-            [formGroupName]="i" 
-            class="p-4 border border-gray-200 rounded-lg bg-gray-50"
-        >
+      <div formArrayName="ingredients" class="space-y-5">
+        @for (ingredientGroup of ingredientForms.controls; track $index; let i = $index) {
+          <div
+            [formGroupName]="i"
+            class="p-5 bg-gray-50 border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition"
+          >
             <input type="hidden" formControlName="id" />
-            <h2 class="text-sm font-semibold mb-2">Ingredient #{{ i + 1 }}</h2>
-            
-            <div class="flex gap-3 mb-2">
-                <div class="flex-grow">
-                    <label class="block text-gray-700 text-xs font-bold mb-1">Name</label>
-                    <input
-                        formControlName="name"
-                        placeholder="e.g., Flour"
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight text-sm focus:outline-none focus:shadow-outline"
-                    />
-                </div>
-                
-                <div class="w-1/3">
-                    <label class="block text-gray-700 text-xs font-bold mb-1">Amount</label>
-                    <input
-                        formControlName="amount"
-                        placeholder="e.g., 2 cups"
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight text-sm focus:outline-none focus:shadow-outline"
-                    />
-                </div>
-            </div>
 
-            <button 
+            <div class="flex flex-col sm:flex-row sm:items-end gap-4">
+              <div class="flex-grow">
+                <label class="block text-gray-700 text-xs font-bold mb-1">Name</label>
+                <input
+                  formControlName="name"
+                  placeholder="e.g., Flour"
+                  class="border border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 text-sm focus:ring-2 focus:ring-orange-400 focus:outline-none transition shadow-inner"
+                />
+              </div>
+
+              <div class="sm:w-1/3">
+                <label class="block text-gray-700 text-xs font-bold mb-1">Amount</label>
+                <input
+                  formControlName="amount"
+                  placeholder="e.g., 2 cups"
+                  class="border border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 text-sm focus:ring-2 focus:ring-orange-400 focus:outline-none transition shadow-inner"
+                />
+              </div>
+
+              <button
                 (click)="deleteIngredientForm(i)"
                 type="button"
-                class="mt-2 bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-sm focus:outline-none focus:shadow-outline"
-            >
-                Remove Ingredient
-            </button>
-        </div>
+                class="bg-red-500 hover:bg-red-600 text-white text-sm font-semibold py-2 px-3 rounded-md shadow-sm transition focus:ring-2 focus:ring-red-400"
+              >
+                Remove
+              </button>
+            </div>
+          </div>
         }
-    </div>
-    
-    <button 
+      </div>
+
+      <button
         (click)="addIngredientForm()"
         type="button"
-        class="mt-4 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-    > 
-        Add Ingredient 
-    </button>
+        class="mt-5 w-full bg-gradient-to-r from-blue-500 to-sky-500 hover:from-blue-600 hover:to-sky-600 text-white font-semibold py-2.5 px-4 rounded-lg shadow-md hover:shadow-lg transition"
+      >
+        Add Ingredient
+      </button>
+    </div>
 
-    <!--INSTRUCTIONS-->
-    
-    <div class="border-t border-gray-300 my-6"></div> 
+    <!-- Instructions -->
+    <div class="border-t border-gray-200 pt-8">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+        Instructions
+      </h2>
 
-    <h1 class="text-xl font-bold mb-4">Instructions</h1>
-
-    <div
+      <div
         formArrayName="instructions"
         cdkDropList
         (cdkDropListDropped)="dropInstruction($event)"
-        class="space-y-4"
-    >   
-    @for (instructionGroup of instructionForms.controls; track instructionGroup ; let i=$index)  {
-    <div
-        [formGroupName]="i"
-        cdkDrag
-        class="p-4 border border-gray-200 rounded-lg bg-gray-50 flex items-center gap-3"
-    >
-        <input type="hidden" formControlName="id" />
-        <input type="hidden" formControlName="step" />
-
-        <!-- Drag handle -->
-        <div
-        cdkDragHandle
-        class="cursor-grab text-gray-500 hover:text-gray-700 text-lg select-none"
-        title="Drag to reorder"
-        >
-        ☰
-        </div>
-
-        <!-- Step info and input -->
-        <div class="flex-grow flex flex-col sm:flex-row sm:items-center sm:gap-2">
-            <h2 class="text-sm font-semibold text-gray-700 min-w-[70px]">
-                Step #{{ i + 1 }}
-            </h2>
-
-            <label class="text-gray-700 text-xs font-semibold mr-2 whitespace-nowrap"
-                >Instruction:</label
+        class="space-y-5"
+      >
+        @for (instructionGroup of instructionForms.controls; track instructionGroup; let i = $index) {
+            <div
+                [formGroupName]="i"
+                cdkDrag
+                class="p-5 bg-gray-50 border border-gray-200 rounded-xl flex items-center gap-4 shadow-sm hover:shadow-md transition"
             >
-            <input
-                formControlName="instruction"
-                placeholder="e.g., Peel potatoes"
-                class="shadow-inner appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
-            />
-            </div>
+                <input type="hidden" formControlName="id" />
+                <input type="hidden" formControlName="step" />
 
-            <!-- Delete button -->
-            <button
-            (click)="deleteInstructionForm(i)"
-            type="button"
-            class="flex-shrink-0 flex items-center justify-center bg-red-500 hover:bg-red-600 text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-300 transition"
-            title="Delete step"
-            >
-            <!-- Trash icon -->
-                <svg
-                    class="w-4 h-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
+                <!-- Drag Handle -->
+                <div
+                cdkDragHandle
+                class="cursor-grab text-gray-400 hover:text-gray-700 text-xl select-none"
+                title="Drag to reorder"
                 >
-                    <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                    ></path>
-                </svg>
-            </button>
+                ☰
+                </div>
+
+                <!-- Input Section -->
+                <div class="flex-grow flex flex-col sm:flex-row sm:items-center sm:gap-3">
+                    <h3 class="text-sm font-semibold text-gray-700 min-w-[75px]">
+                        Step #{{ i + 1 }}
+                    </h3>
+                    <input
+                        formControlName="instruction"
+                        placeholder="e.g., Preheat the oven to 180°C"
+                        class="border border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 text-sm focus:ring-2 focus:ring-orange-400 focus:outline-none transition shadow-inner"
+                    />
+                </div>
+
+                <!-- Delete -->
+                    <button
+                        (click)="deleteInstructionForm(i)"
+                        type="button"
+                        class="bg-red-500 hover:bg-red-600 text-white text-sm font-semibold py-2 px-3 rounded-md shadow-sm transition focus:ring-2 focus:ring-red-400"
+                    >
+                        Remove
+                    </button>
+            </div>
+        }
         </div>
-    }
+
+      <button
+        (click)="addInstructionForm()"
+        type="button"
+        class="mt-5 w-full bg-gradient-to-r from-blue-500 to-sky-500 hover:from-blue-600 hover:to-sky-600 text-white font-semibold py-2.5 px-4 rounded-lg shadow-md hover:shadow-lg transition"
+      >
+        Add Instruction
+      </button>
     </div>
-    
+    <div class="border-t border-gray-200 pt-8 flex justify-center items-center gap-6">
+        <button
+            type="submit"
+            (click)="submit()"
+            [disabled]="editForm.invalid"
+            class="w-1/2 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-semibold py-2.5 px-6 rounded-lg shadow-md hover:shadow-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+            Save Changes
+        </button>
 
+        <button
+            (click)="cancel()"
+            type="button"
+            class="w-1/2 bg-red-500 hover:bg-red-600 text-white font-semibold py-2.5 px-6 rounded-lg shadow-md hover:shadow-lg transition focus:ring-2 focus:ring-red-400"
+        >
+            Cancel
+        </button>
+    </div>
 
-    <button 
-    (click)="addInstructionForm()"
-    type="button"
-    class="mt-4 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-    >
-    Add Instruction
-    </button>
-
-    <div class="border-t border-gray-300 my-6"></div>
-
-    <button
-        type="submit"
-        (click)="submit()"
-        [disabled]="editForm.invalid"
-        class="w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:opacity-50 disabled:cursor-not-allowed transition"
-    >
-        Save Changes
-    </button>
-</form>
+  </form>
 </div>
