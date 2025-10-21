@@ -15,6 +15,6 @@ export class RecipesComponent {
 
   recipes:Recipe[] = [];
   ngOnInit() {
-    this.recipesService.getAllRecipes().subscribe(recipes => this.recipes = recipes.data);
+    this.recipesService.getAllRecipes().subscribe(recipes => this.recipes = recipes);
    }  
 }
