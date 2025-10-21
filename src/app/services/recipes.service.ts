@@ -11,18 +11,32 @@ export class RecipesService {
 
   constructor(private apiService: ApiService) { }
 
-  public getAllRecipes():Observable<Recipes>
+  public getAllRecipes():Observable<Recipe[]>
   {
-    return this.apiService.get('recipes', {
+    return this.apiService.get<{ data: Recipe[] }> ('recipes', {
       params: {},
       responseType: 'json'
-    })
+    }).pipe(
+      map(response => response.data) // unwrap the data
+    );
   } 
 
   public getRecipe(id:number):Observable<RecipeDetails>
   {
     return this.apiService
     .get<{ data: RecipeDetails }>(`recipes/${id}`, {
+      params: {},
+      responseType: 'json'
+    }) // pass empty options
+    .pipe(
+      map(response => response.data) // unwrap the data
+    );
+  }
+  
+    public getMyRecipes():Observable<Recipe[]>
+  {
+    return this.apiService
+    .get<{ data: Recipe[] }>(`my-recipes`, {
       params: {},
       responseType: 'json'
     }) // pass empty options
