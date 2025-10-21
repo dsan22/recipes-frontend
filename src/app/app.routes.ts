@@ -4,6 +4,7 @@ import { RecipeDetailsComponent } from './recipe-details/recipe-details.componen
 import { EditRecipeComponent } from './edit-recipe/edit-recipe.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { UsersRecipesComponent } from './users-recipes/users-recipes.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -11,4 +12,5 @@ export const routes: Routes = [
     { path: '', component: RecipesComponent },
     { path: 'recipes/:id', component: RecipeDetailsComponent },
     { path: 'recipes/:id/edit', component: EditRecipeComponent },
+    { path: 'my-recipes', component: UsersRecipesComponent },
 ];

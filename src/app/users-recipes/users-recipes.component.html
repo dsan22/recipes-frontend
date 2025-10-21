@@ -1,0 +1,39 @@
+<div class="min-h-screen bg-gray-50 py-10">
+ 
+  <div class="max-w-6xl mx-auto px-6">
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row justify-between items-center mb-10">
+      <h1 class="text-4xl font-bold text-gray-800 mb-4 sm:mb-0">My Recipes</h1>
+
+      <button
+        (click)="createRecipe()"
+        class="flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white font-medium px-6 py-2.5 rounded-xl shadow-md transition-all duration-200"
+      >
+        <span class="text-lg">＋</span>
+        New Recipe
+      </button>
+    </div>
+
+    <!-- Recipe Grid -->
+    @if ((recipes.length) > 0) {
+      <div  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        @for (recipe of recipes; track $index) {
+          <app-recipe [recipe]="recipe"></app-recipe>
+        }
+      </div>
+    }@else {
+    <!-- Empty state -->
+    <div class="text-center mt-20 text-gray-500">
+      <h2 class="text-2xl font-semibold mb-4">No recipes yet</h2>
+      <p class="mb-6">Start by creating your first recipe!</p>
+      <button
+        (click)="createRecipe()"
+        class="bg-amber-500 hover:bg-amber-600 text-white font-medium px-6 py-2.5 rounded-xl shadow-md transition-all duration-200"
+      >
+        Create Recipe
+      </button>
+    </div>
+  }
+  </div>
+
+</div>
