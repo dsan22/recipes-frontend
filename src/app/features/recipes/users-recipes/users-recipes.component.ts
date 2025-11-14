@@ -3,7 +3,7 @@ import { RecipesService } from '../recipes.service';
 import { Router } from '@angular/router';
 import { Recipe, RecipeDetails } from '../../../../types';
 import { CommonModule } from '@angular/common';
-import { RecipeComponent } from "../recipe/recipe.component";
+import { RecipeComponent } from "../item/recipe.component";
 
 @Component({
   selector: 'app-users-recipes',

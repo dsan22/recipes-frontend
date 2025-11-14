@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Recipe, Recipes } from '../../../../types';
-import { RecipeComponent } from '../recipe/recipe.component';
+import { RecipeComponent } from '../item/recipe.component';
 import { CommonModule } from '@angular/common';
 import { RecipesService } from '../recipes.service';
 
