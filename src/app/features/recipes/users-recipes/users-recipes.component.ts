@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { RecipesService } from '../services/recipes.service';
+import { RecipesService } from '../recipes.service';
 import { Router } from '@angular/router';
-import { Recipe, RecipeDetails } from '../../types';
-import { CapitalizePipe } from "../pipes/capitalize.pipe";
+import { Recipe, RecipeDetails } from '../../../../types';
 import { CommonModule } from '@angular/common';
 import { RecipeComponent } from "../recipe/recipe.component";
 

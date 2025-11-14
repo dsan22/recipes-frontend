@@ -1,10 +1,11 @@
 import { Routes } from '@angular/router';
-import { RecipesComponent } from './recipes/recipes.component';
-import { RecipeDetailsComponent } from './recipe-details/recipe-details.component';
-import { EditRecipeComponent } from './edit-recipe/edit-recipe.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { UsersRecipesComponent } from './users-recipes/users-recipes.component';
+import { RecipesComponent } from './features/recipes/recipes/recipes.component';
+import { RecipeDetailsComponent } from './features/recipes/recipe-details/recipe-details.component';
+
+import { LoginComponent } from './features/auth/login/login.component';
+import { RegisterComponent } from './features/auth/register/register.component';
+import { UsersRecipesComponent } from './features/recipes/users-recipes/users-recipes.component';
+import { EditRecipeComponent } from './features/recipes/edit-recipe/edit-recipe.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },

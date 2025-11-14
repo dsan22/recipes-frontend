@@ -1,7 +1,7 @@
 import { Component} from '@angular/core';
-import { RecipeDetails } from '../../types';
+import { RecipeDetails } from '../../../../types';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RecipesService } from '../services/recipes.service';
+import { RecipesService } from '../recipes.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 

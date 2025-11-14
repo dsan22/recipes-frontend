@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { Recipe } from '../../types';
-import { CapitalizePipe } from '../pipes/capitalize.pipe';
+import { Recipe } from '../../../../types';
+
 import { Router } from '@angular/router';
+import { CapitalizePipe } from '../../../shared/pipes/capitalize.pipe';
 
 @Component({
   selector: 'app-recipe',

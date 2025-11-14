@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { Recipe, Recipes } from '../../types';
+import { Recipe, Recipes } from '../../../../types';
 import { RecipeComponent } from '../recipe/recipe.component';
 import { CommonModule } from '@angular/common';
-import { RecipesService } from '../services/recipes.service';
+import { RecipesService } from '../recipes.service';
 
 @Component({
   selector: 'app-recipes',

@@ -1,10 +1,11 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RecipesService } from '../services/recipes.service';
-import { Instruction, RecipeDetails } from '../../types';
+
+import { Instruction, RecipeDetails } from '../../../../types';
 import { FormBuilder, FormGroup, ReactiveFormsModule,FormArray  } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DragDropModule,CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { RecipesService } from '../recipes.service';
 
 @Component({
   selector: 'app-edit-recipe',
