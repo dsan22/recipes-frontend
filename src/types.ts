@@ -19,6 +19,7 @@ export interface LoginData {
 }
 export interface LoginResponse {
     access_token:string,
+    user:User
 }
 
 export interface RegisterData {
@@ -58,4 +59,9 @@ export interface RecipeDetails extends Recipe {
     ingredients:Ingredient[],
     instructions:Instruction[],
     images:string[]    
+}
+
+export interface User  {
+    name:string,
+    email:string   
 }
