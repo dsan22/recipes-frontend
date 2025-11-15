@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Recipe, RecipeDetails, Recipes } from '../../../types';
+import { CreateBlankRecipeDTO, CreateRecipeResponse, Recipe, RecipeDetails, Recipes } from '../../../types';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ApiService } from '../../core/services/api.service';
@@ -48,10 +48,16 @@ export class RecipesService {
 
   public updateRecipe(id: number, recipeData: any): Observable<RecipeDetails> {
     return this.apiService
-      .put<{ data: RecipeDetails }>(`recipes/${id}`, recipeData, {
+      .put<RecipeDetails>(`recipes/${id}`, recipeData, {
         responseType: 'json'
-      })
-      .pipe(map(response => response.data));
+      });
   }
+
+  public createRecipe(recipeData: CreateBlankRecipeDTO): Observable<CreateRecipeResponse> {
+  return this.apiService
+    .post<CreateRecipeResponse>('recipes', recipeData, {
+      responseType: 'json'
+    });
+}
 
 }

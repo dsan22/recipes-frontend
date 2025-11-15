@@ -22,6 +22,7 @@ export class AuthService {
         this.tokenService.setToken(response.access_token);
 
         const userData: User = {
+          id:response.user.id,
           name: response.user.name,
           email: response.user.email,
         };

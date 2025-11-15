@@ -38,6 +38,21 @@ export interface Recipe {
     user: string
     category: string
 }
+
+export interface CreateBlankRecipeDTO {
+    name:string
+    description: string
+    user_id:number
+    category_id: number
+}
+export interface CreateRecipeResponse
+{
+    id:number,
+    name: string,
+    description: string,
+    category_id: number,
+    user_id: number,
+}
 export interface Recipes {
     data:Recipe[]
 }
@@ -62,6 +77,7 @@ export interface RecipeDetails extends Recipe {
 }
 
 export interface User  {
+    id:number,
     name:string,
     email:string   
 }
