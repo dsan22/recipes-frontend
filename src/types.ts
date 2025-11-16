@@ -73,9 +73,14 @@ export interface Instruction {
 export interface RecipeDetails extends Recipe {
     ingredients:Ingredient[],
     instructions:Instruction[],
-    images:string[]    
+    images:Image[]    
 }
 
+export interface Image extends Recipe {
+    id:number,
+    image:string,
+    is_cover:boolean  
+}
 export interface User  {
     id:number,
     name:string,

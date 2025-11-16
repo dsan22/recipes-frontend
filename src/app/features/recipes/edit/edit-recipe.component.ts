@@ -6,10 +6,11 @@ import { FormBuilder, FormGroup, ReactiveFormsModule,FormArray  } from '@angular
 import { CommonModule } from '@angular/common';
 import { DragDropModule,CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { RecipesService } from '../recipes.service';
+import { RecipeImageFormModalComponent } from '../../../shared/ui/recipe-image-form-modal/recipe-image-form-modal.component';
 
 @Component({
   selector: 'app-edit-recipe',
-  imports: [ReactiveFormsModule,CommonModule,DragDropModule],
+  imports: [ReactiveFormsModule,CommonModule,DragDropModule,RecipeImageFormModalComponent],
   templateUrl: './edit-recipe.component.html',
   styleUrl: './edit-recipe.component.css'
 })
@@ -119,11 +120,43 @@ export class EditRecipeComponent {
     this.updateInstructionSteps(); 
   }
 
-  //For drag and drop
   dropInstruction(event: CdkDragDrop<FormGroup[]>) {
     moveItemInArray(this.instructionForms.controls, event.previousIndex, event.currentIndex);
     this.updateInstructionSteps();
   }
+
+
+  //Image manager
+  showImageModal = false;
+
+  openAddImageModal() {
+    this.showImageModal = true;
+  }
+
+  closeImageModal() {
+    this.showImageModal = false;
+  }
+  
+
+  onSaveImage(event: { image: File | null; isCover: boolean }) {
+  console.log("received image:", event);
+
+  // 🔥 Call API here:
+  // this.recipeService.addImage(recipeId, event.image, event.isCover).subscribe()
+
+  this.showImageModal = false; // close after save
+}
+
+  deleteImage(image: any) {
+    // DELETE API call
+   
+  }
+
+  setAsCover(image: any) {
+    // PATCH API call to set new cover
+    
+  }
+
 
   submit() {
     const id = this.recipe.id;
