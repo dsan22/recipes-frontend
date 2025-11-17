@@ -76,11 +76,12 @@ export interface RecipeDetails extends Recipe {
     images:Image[]    
 }
 
-export interface Image extends Recipe {
+export interface Image {
     id:number,
     image:string,
     is_cover:boolean  
 }
+
 export interface User  {
     id:number,
     name:string,
