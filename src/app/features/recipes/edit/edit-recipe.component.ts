@@ -42,7 +42,7 @@ export class EditRecipeComponent {
     if (id) {
       this.recipesService.getRecipe(+id).subscribe((data)=>{
         this.recipe=data
-
+        console.log(this.recipe);
         this.editForm.patchValue({
               name: data.name,
               description:data.description
@@ -139,13 +139,29 @@ export class EditRecipeComponent {
   
 
   onSaveImage(event: { image: File | null; isCover: boolean }) {
-  console.log("received image:", event);
+    if (!event.image) return;
 
-  // 🔥 Call API here:
-  // this.recipeService.addImage(recipeId, event.image, event.isCover).subscribe()
+    const formData = new FormData();
+    formData.append('image', event.image);   // MUST match Laravel field name
 
-  this.showImageModal = false; // close after save
-}
+    this.recipesService.addImage(this.recipe.id, formData).subscribe({
+      next: (res) => {
+        console.log('Upload success', res);
+
+        // ⬇⬇⬇ UPDATE UI IMMEDIATELY ⬇⬇⬇
+        if (!this.recipe.images) {
+          this.recipe.images = [];
+        }
+        this.recipe.images.push(res.data);      // add new image to grid
+        this.cdr.detectChanges();               // force Angular to refresh the view
+
+        this.showImageModal = false;
+      },
+      error: err => console.error('Upload failed', err)
+    });
+
+    this.showImageModal = false;
+  }
 
   deleteImage(image: any) {
     // DELETE API call
