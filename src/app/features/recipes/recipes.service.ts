@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { CreateBlankRecipeDTO, CreateRecipeResponse, Recipe, RecipeDetails, Recipes } from '../../../types';
+import { AddImageResponse, CreateBlankRecipeDTO, CreateRecipeResponse, Image, Recipe, RecipeDetails, Recipes } from '../../../types';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ApiService } from '../../core/services/api.service';
@@ -34,7 +34,7 @@ export class RecipesService {
     );
   }
   
-    public getMyRecipes():Observable<Recipe[]>
+  public getMyRecipes():Observable<Recipe[]>
   {
     return this.apiService
     .get<{ data: Recipe[] }>(`my-recipes`, {
@@ -54,10 +54,17 @@ export class RecipesService {
   }
 
   public createRecipe(recipeData: CreateBlankRecipeDTO): Observable<CreateRecipeResponse> {
-  return this.apiService
-    .post<CreateRecipeResponse>('recipes', recipeData, {
-      responseType: 'json'
-    });
-}
+    return this.apiService
+      .post<CreateRecipeResponse>('recipes', recipeData, {
+        responseType: 'json'
+      });
+  }
+
+  public addImage(recipe_id: number, formData: FormData): Observable<AddImageResponse> {
+    return this.apiService.post<AddImageResponse>(
+      `recipes/${recipe_id}/images`,formData,                         
+      { responseType: 'json' }
+    );
+  }
 
 }

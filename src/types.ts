@@ -82,6 +82,11 @@ export interface Image {
     is_cover:boolean  
 }
 
+export interface AddImageResponse {
+    data:Image,
+    message:string
+}
+
 export interface User  {
     id:number,
     name:string,
