@@ -85,11 +85,12 @@
 
   <!-- Modal -->
 
-  <app-recipe-image-form-modal
-  *ngIf="showImageModal"
-  (close)="closeImageModal()"
-  (save)="onSaveImage($event)"
-/>
+  @if (showImageModal) {
+    <app-recipe-image-form-modal
+      (close)="closeImageModal()"
+      (save)="onSaveImage($event)"
+    />
+  }
 </div>
     <!-- Ingredients -->
     <div class="border-t border-gray-200 pt-8">
