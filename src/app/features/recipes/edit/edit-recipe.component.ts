@@ -173,11 +173,22 @@ export class EditRecipeComponent {
    
   }
 
-  setAsCover(image: any) {
-    // PATCH API call to set new cover
-    
-  }
+ setAsCover(image: any) {
+  this.recipesService.setCover(this.recipe.id, image.id, true).subscribe({
+    next: (res) => {
+      console.log('Cover updated', res.message);
 
+      // Update local state: set all images is_cover = false
+      this.recipe.images = this.recipe.images.map(img => ({
+        ...img,
+        is_cover: img.id === image.id
+      }));
+
+      this.cdr.detectChanges();
+    },
+    error: err => console.error('Cover update failed', err)
+  });
+ }
 
   submit() {
     const id = this.recipe.id;

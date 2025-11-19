@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { AddImageResponse, ApiResponse, CreateBlankRecipeDTO, CreateRecipeResponse, Image, Recipe, RecipeDetails, Recipes } from '../../../types';
+import { ApiResponse, CreateBlankRecipeDTO, CreateRecipeResponse, Image, ImageResponse, Recipe, RecipeDetails, Recipes } from '../../../types';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ApiService } from '../../core/services/api.service';
@@ -60,8 +60,8 @@ export class RecipesService {
       });
   }
 
-  public addImage(recipe_id: number, formData: FormData): Observable<AddImageResponse> {
-    return this.apiService.post<AddImageResponse>(
+  public addImage(recipe_id: number, formData: FormData): Observable<ImageResponse> {
+    return this.apiService.post<ImageResponse>(
       `recipes/${recipe_id}/images`,formData,                         
       { responseType: 'json' }
     );
@@ -73,5 +73,12 @@ export class RecipesService {
       { responseType: 'json' }
     );
   }
+  setCover(recipeId: number, imageId: number, isCover: boolean): Observable<ImageResponse> {
+  return this.apiService.put<ImageResponse>(
+    `recipes/${recipeId}/images/${imageId}/cover`,
+    { is_cover: isCover },
+    {responseType:"json"}
+  );
+}
 
 }
