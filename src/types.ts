@@ -82,7 +82,7 @@ export interface Image {
     is_cover:boolean  
 }
 
-export interface AddImageResponse {
+export interface ImageResponse {
     data:Image,
     message:string
 }
